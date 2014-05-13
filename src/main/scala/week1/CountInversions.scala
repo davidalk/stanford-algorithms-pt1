@@ -16,7 +16,7 @@ object CountInversions {
     stringArray.map(_.toInt)
   }
 
-  def mergeAndCount(a: Array[Int], b: Array[Int]): (Array[Int], Int) = {
+  def mergeAndCount(a: Array[Int], b: Array[Int]): (Array[Int], Long) = {
     val outputSize = a.length + b.length
     var (returnArray, inversions) = (Array.fill(outputSize)(0), 0)
     var aIndex, bIndex = 0
@@ -35,9 +35,9 @@ object CountInversions {
     (returnArray, inversions)
   }
 
-  def sortAndCount(in: Array[Int]): (Array[Int], Int) = {
+  def sortAndCount(in: Array[Int]): (Array[Int], Long) = {
     var outArray = Array[Int]()
-    var inversions = 0
+    var inversions = 0L
     if (in.size <= 1) {
       outArray = in
     }
