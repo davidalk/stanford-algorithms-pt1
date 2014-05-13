@@ -5,7 +5,10 @@ import scala.io.Source
 object CountInversions {
 
   def main(args: Array[String]) {
-    println("Hello World!")
+    println("Sorted array from file:")
+    val input = loadFile("IntegerArray.txt")
+    val (array, inversions) = sortAndCount(input)
+    println("Total inversions: " + inversions)
   }
 
   def loadFile(filename: String): Array[Int] = {
@@ -13,9 +16,9 @@ object CountInversions {
     stringArray.map(_.toInt)
   }
 
-  def mergeAndCout(a: Array[Int], b: Array[Int]): Array[Int] = {
+  def mergeAndCount(a: Array[Int], b: Array[Int]): (Array[Int], Int) = {
     val outputSize = a.length + b.length
-    val returnArray = Array.fill(outputSize)(0)
+    var (returnArray, inversions) = (Array.fill(outputSize)(0), 0)
     var aIndex, bIndex = 0
     val aWithMarker = a :+ Int.MaxValue
     val bWithMarker = b :+ Int.MaxValue
@@ -24,23 +27,28 @@ object CountInversions {
         returnArray(i) = aWithMarker(aIndex)
         aIndex += 1
       } else {
+        inversions += a.length - aIndex
         returnArray(i) = bWithMarker(bIndex)
         bIndex += 1
       }
     }
-    returnArray
+    (returnArray, inversions)
   }
 
-  def sortAndCount(in: Array[Int]): Array[Int] = {
+  def sortAndCount(in: Array[Int]): (Array[Int], Int) = {
     var outArray = Array[Int]()
-    if (in.size == 1)
+    var inversions = 0
+    if (in.size <= 1) {
       outArray = in
+    }
     else {
       val splitIndex = (in.length / 2).floor.toInt
-      val a = sortAndCount(in.slice(0, splitIndex))
-      val b = sortAndCount(in.slice(splitIndex, in.length))
-      outArray = mergeAndCout(a, b)
+      val (a, inversionsA) = sortAndCount(in.slice(0, splitIndex))
+      val (b, inversionsB) = sortAndCount(in.slice(splitIndex, in.length))
+      val (mergeArray, inversionsMerge) = mergeAndCount(a, b)
+      outArray = mergeArray
+      inversions = inversionsA + inversionsB + inversionsMerge
     }
-    outArray
+    (outArray, inversions)
   }
 }
