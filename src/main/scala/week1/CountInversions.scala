@@ -1,19 +1,15 @@
 package week1
 
 import scala.io.Source
+import common.Util
 
 object CountInversions {
 
   def main(args: Array[String]) {
     println("Sorted array from file:")
-    val input = loadFile("IntegerArray.txt")
+    val input = Util.loadFile("IntegerArray.txt")
     val (array, inversions) = sortAndCount(input)
     println("Total inversions: " + inversions)
-  }
-
-  def loadFile(filename: String): Array[Int] = {
-    val stringArray = Source.fromInputStream(getClass.getResourceAsStream("/" + filename)).getLines.toArray
-    stringArray.map(_.toInt)
   }
 
   def mergeAndCount(a: Array[Int], b: Array[Int]): (Array[Int], Long) = {
