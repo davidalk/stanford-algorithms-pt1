@@ -5,7 +5,7 @@ import common.Util
 
 object CountInversions {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]) = {
     println("Sorted array from file:")
     val input = Util.loadFile("IntegerArray.txt")
     val (array, inversions) = sortAndCount(input)
