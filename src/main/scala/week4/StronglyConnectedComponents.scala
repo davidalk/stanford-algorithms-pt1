@@ -25,7 +25,7 @@ object StronglyConnectedComponents {
         val v = stack.pop
         if (!visited(v)) {
           visited(v) = true
-          order = v :: order
+          order = order :+ v
           defaultGraph(v) map { stack.push(_) }
         }
       }
@@ -40,5 +40,6 @@ object StronglyConnectedComponents {
 
     order
   }
+  
 
 }

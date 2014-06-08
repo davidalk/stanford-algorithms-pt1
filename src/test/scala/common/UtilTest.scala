@@ -26,14 +26,28 @@ class UtilTest extends FlatSpec {
     }
   }
 
-  "The directed graph file" should "be loaded as a map of lists" in {
+  "The loadDirecedGraph function" should "load file as a map of lists" in {
     val expected = HashMap[Int, List[Int]](
-        1 -> List(2, 3, 4),
-        3 -> List(4),
-        4 -> List(2))
-        
+      1 -> List(2, 3, 4),
+      3 -> List(4),
+      4 -> List(2))
+
     val result = Util.loadDirectedGraph("test_directed_graph.txt")
-    
+
+    expected.foreach {
+      case (k, v) =>
+        assert(v == result(k).sorted)
+    }
+  }
+
+  "The loadInvertedDirectedGraph function" should "load the inverse of the graph as a map of lists" in {
+    val expected = HashMap[Int, List[Int]](
+      2 -> List(1, 4),
+      3 -> List(1),
+      4 -> List(1, 3))
+
+    val result = Util.loadInvertedDirectedGraph("test_directed_graph.txt")
+
     expected.foreach {
       case (k, v) =>
         assert(v == result(k).sorted)
