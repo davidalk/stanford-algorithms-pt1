@@ -11,7 +11,7 @@ class StronglyConnectedComponentsTest extends FlatSpec {
         3 -> List(4),
         4 -> List(2))
         
-    val expected = List(1, 3, 4, 2)
+    val expected = List(3, 2, 4, 1)
     
     val result = StronglyConnectedComponents.dfs(graph)
     

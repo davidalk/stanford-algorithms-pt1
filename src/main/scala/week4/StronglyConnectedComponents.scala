@@ -2,14 +2,13 @@ package week4
 
 import scala.collection.mutable.HashMap
 import common.Util
+import scala.collection.mutable.Stack
 
 object StronglyConnectedComponents {
-  
-  //TODO: fix stack overflow
+
   def main(args: Array[String]): Unit = {
     val graph = Util.loadDirectedGraph("SCC.txt")
     val result = dfs(graph)
-    println(result)
   }
 
   def dfs(graph: Map[Int, List[Int]]): List[Int] = {
@@ -17,23 +16,28 @@ object StronglyConnectedComponents {
 
     val visited = scala.collection.mutable.HashMap[Int, Boolean]().withDefault(_ => false)
     var order = List[Int]()
-    
+
     def dfsVisit(u: Int): Unit = {
-      for(v <- defaultGraph(u)) {
-        if(!visited(v)) {
-           dfsVisit(v)
+      val stack = Stack[Int]()
+      stack.push(u)
+
+      while (!stack.isEmpty) {
+        val v = stack.pop
+        if (!visited(v)) {
+          visited(v) = true
+          order = v :: order
+          defaultGraph(v) map { stack.push(_) }
         }
       }
-      order = u :: order
-      visited(u) = true
     }
-        
-    for(vertex <- defaultGraph.keys) {
-      if(!visited(vertex)) {
+
+    for (vertex <- defaultGraph.keys) {
+      if (!visited(vertex)) {
+        println("Start visit at " + vertex)
         dfsVisit(vertex)
       }
     }
-    
+
     order
   }
 
