@@ -45,7 +45,7 @@ object StronglyConnectedComponents {
     for (vertex <- order) {
       if (!visited(vertex)) {
         println("Start visit at " + vertex)
-        sccList = sccList :+ dfsVisit(vertex)
+        sccList = dfsVisit(vertex) :: sccList
       }
     }
 
@@ -65,7 +65,7 @@ object StronglyConnectedComponents {
         val v = stack.pop
         if (!visited(v)) {
           visited(v) = true
-          order = order :+ v
+          order = v :: order
           defaultGraph(v) map { stack.push(_) }
         }
       }
