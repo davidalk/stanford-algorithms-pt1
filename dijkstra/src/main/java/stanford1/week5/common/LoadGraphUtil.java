@@ -31,7 +31,7 @@ public class LoadGraphUtil {
 		for(String line : lines) {
 			String[] elements = line.split("\t");
 			int nodeId = Integer.valueOf(elements[0]);
-			Node newNode = new Node();
+			Node newNode = new Node(nodeId);
 			for(int i=1; i<elements.length; i++) {
 				String[] edgeDetails = elements[i].split(",");
 				newNode.addEdge(new Edge(Integer.valueOf(edgeDetails[0]), Integer.valueOf(edgeDetails[1])));

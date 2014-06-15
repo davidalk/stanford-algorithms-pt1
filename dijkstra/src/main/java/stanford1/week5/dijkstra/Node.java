@@ -6,6 +6,8 @@ import java.util.List;
 public class Node {
 
 	public static final int MAX_DISTANCE = 1000000;
+	
+	private final int nodeId;
 
 	private int distance;
 
@@ -13,11 +15,16 @@ public class Node {
 
 	private List<Edge> edges;
 
-	public Node() {
+	public Node(int nodeId) {
+		this.nodeId = nodeId;
 		edges = new ArrayList<Edge>();
 		previous = null;
 		distance = Node.MAX_DISTANCE;
 
+	}
+	
+	public int getNodeId() {
+		return nodeId;
 	}
 
 	public int getDistance() {

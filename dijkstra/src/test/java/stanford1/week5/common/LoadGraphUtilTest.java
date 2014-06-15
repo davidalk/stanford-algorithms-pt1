@@ -20,25 +20,25 @@ public class LoadGraphUtilTest {
 		
 		expected[0] = null;
 		
-		expected[1] = new Node();
+		expected[1] = new Node(1);
 		expected[1].addEdge(new Edge(2, 30));
 		expected[1].addEdge(new Edge(4, 13));
 		
-		expected[2] = new Node();
+		expected[2] = new Node(2);
 		expected[2].addEdge(new Edge(3, 80));
 		expected[2].addEdge(new Edge(5, 43));
 		expected[2].addEdge(new Edge(4, 8));
 		
-		expected[3] = new Node();
+		expected[3] = new Node(3);
 		expected[3].addEdge(new Edge(2, 90));
 		expected[3].addEdge(new Edge(1, 23));
 		
-		expected[4] = new Node();
+		expected[4] = new Node(4);
 		expected[4].addEdge(new Edge(5, 3));
 		expected[4].addEdge(new Edge(3, 59));
 		expected[4].addEdge(new Edge(1, 17));
 		
-		expected[5] = new Node();
+		expected[5] = new Node(5);
 		expected[5].addEdge(new Edge(4, 450));
 		expected[5].addEdge(new Edge(2, 43));
 		expected[5].addEdge(new Edge(1, 150));
