@@ -10,6 +10,11 @@ object Util {
     stringArray.map(_.toInt)
   }
 
+  def loadFileLongs(filename: String): Array[Long] = {
+    val stringArray = Source.fromInputStream(getClass.getResourceAsStream("/" + filename)).getLines.toArray
+    stringArray.map(_.toLong)
+  }
+
   def loadGraph(filename: String): Map[Int, List[Int]] = {
     val rows = Source.fromInputStream(getClass.getResourceAsStream("/" + filename)).getLines
     val returnMap = HashMap[Int, List[Int]]()
